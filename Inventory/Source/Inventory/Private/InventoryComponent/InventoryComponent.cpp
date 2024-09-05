@@ -1,9 +1,22 @@
 
 #include "InventoryComponent/InventoryComponent.h"
+#include "Widget/InventoryWidgetController.h"
+
+
 UInventoryComponent::UInventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
+}
+
+UInventoryWidgetController* UInventoryComponent::GetInventoryWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (InventoryWidgetController == nullptr)
+	{
+		InventoryWidgetController = NewObject<UInventoryWidgetController>(this, InventoryWidgetControllerClass);
+		InventoryWidgetController->SetWidgetControllerParams(WCParams);
+	}
+	return InventoryWidgetController;
 }
 
 

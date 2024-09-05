@@ -7,6 +7,9 @@
 #include "InventoryComponent.generated.h"
 
 
+class UInventoryWidgetController;
+struct FWidgetControllerParams;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class INVENTORY_API UInventoryComponent : public UActorComponent
 {
@@ -15,9 +18,18 @@ class INVENTORY_API UInventoryComponent : public UActorComponent
 public:	
 	UInventoryComponent();
 
+	UFUNCTION(BlueprintCallable)
+	UInventoryWidgetController* GetInventoryWidgetController(const FWidgetControllerParams& WCParams);
+
 protected:
 	virtual void BeginPlay() override;
 
+private:
+
+	TObjectPtr<UInventoryWidgetController> InventoryWidgetController;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UInventoryWidgetController> InventoryWidgetControllerClass;
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 

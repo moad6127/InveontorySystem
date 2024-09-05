@@ -39,7 +39,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 
+	UFUNCTION(BlueprintCallable)
+	APlayerController* GetPlayerController() { return PlayerController; }
 
+	UFUNCTION(BlueprintCallable)
+	UInventoryComponent* GetInventoryComponent() { return InventoryComponent; }
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
