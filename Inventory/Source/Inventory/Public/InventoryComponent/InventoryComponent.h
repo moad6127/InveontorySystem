@@ -10,6 +10,8 @@
 class UInventoryWidgetController;
 struct FWidgetControllerParams;
 
+class UItemObject;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class INVENTORY_API UInventoryComponent : public UActorComponent
 {
@@ -22,6 +24,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UInventoryWidgetController* GetInventoryWidgetController(const FWidgetControllerParams& WCParams);
+
+	bool TryAddItems(UItemObject* InItem);
+
+
+	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
 protected:
 	virtual void BeginPlay() override;
 
@@ -37,4 +44,7 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta = (AllowPrivateAccess = "true"))
 	int32 Rows = 5;
+
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = "Items", meta = (AllowPrivateAccess = "true"))
+	TArray<TObjectPtr<UItemObject>> InventoryItems;
 };

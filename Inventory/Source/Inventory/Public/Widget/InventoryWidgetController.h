@@ -52,4 +52,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
 	TObjectPtr<UInventoryComponent> InventoryComponent;
 
+private:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float TileSize = 50.f;
+
 };
