@@ -18,9 +18,10 @@ class INVENTORY_API UInventoryComponent : public UActorComponent
 public:	
 	UInventoryComponent();
 
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	UFUNCTION(BlueprintCallable)
 	UInventoryWidgetController* GetInventoryWidgetController(const FWidgetControllerParams& WCParams);
-
 protected:
 	virtual void BeginPlay() override;
 
@@ -30,8 +31,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UInventoryWidgetController> InventoryWidgetControllerClass;
-public:	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta =(AllowPrivateAccess = "true"))
+	int32 Colums = 5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta = (AllowPrivateAccess = "true"))
+	int32 Rows = 5;
 };
