@@ -5,12 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Interface/InventoryPlayerInterface.h"
 #include "ThirdCharacter.generated.h"
 
 class AInventoryHUD;
+class UItemObject;
 
 UCLASS()
-class INVENTORY_API AThirdCharacter : public ACharacter
+class INVENTORY_API AThirdCharacter : public ACharacter, public IInventoryPlayerInterface
 {
 	GENERATED_BODY()
 
@@ -46,6 +48,8 @@ class INVENTORY_API AThirdCharacter : public ACharacter
 
 	UPROPERTY()
 	AInventoryHUD* HUD;
+
+	virtual bool AddItem(UItemObject* InItem) override;
 
 public:
 	// Sets default values for this character's properties

@@ -19,6 +19,11 @@ UInventoryWidgetController* UInventoryComponent::GetInventoryWidgetController(co
 	return InventoryWidgetController;
 }
 
+bool UInventoryComponent::TryAddItems(UItemObject* InItem)
+{
+	return false;
+}
+
 
 void UInventoryComponent::BeginPlay()
 {

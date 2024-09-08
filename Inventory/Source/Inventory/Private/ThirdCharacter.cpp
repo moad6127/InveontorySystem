@@ -67,6 +67,7 @@ void AThirdCharacter::BeginPlay()
 	}
 	
 	HUD = Cast<AInventoryHUD>(PlayerController->GetHUD());
+
 	if (HUD)
 	{
 		HUD->InitHUD(PlayerController, InventoryComponent);
@@ -93,6 +94,11 @@ void AThirdCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Completed, this, &AThirdCharacter::ShowInventory);
 
 	}
+}
+
+bool AThirdCharacter::AddItem(UItemObject* InItem)
+{
+	return InventoryComponent->TryAddItems(InItem);
 }
 
 void AThirdCharacter::Move(const FInputActionValue& Value)

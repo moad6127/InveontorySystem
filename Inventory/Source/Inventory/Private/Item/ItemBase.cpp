@@ -5,7 +5,6 @@
 #include "Components/SphereComponent.h"
 #include "Item/ItemObject.h"
 
-
 AItemBase::AItemBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
