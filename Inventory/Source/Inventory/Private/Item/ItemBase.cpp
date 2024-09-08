@@ -4,6 +4,8 @@
 #include "Item/ItemBase.h"
 #include "Components/SphereComponent.h"
 #include "Item/ItemObject.h"
+#include "Interface/InventoryPlayerInterface.h"
+
 
 AItemBase::AItemBase()
 {
@@ -38,5 +40,12 @@ void AItemBase::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	// 오버랩 이벤트 작성하기
 	// C++로 캐릭터를 만들었을경우 인벤토리 컴포넌트의 addItem함수를 호출하기
+	if (IInventoryPlayerInterface* Player = Cast<IInventoryPlayerInterface>(OtherActor))
+	{
+		if (Player->AddItem(ItemObject))
+		{
+			Destroy();
+		}
+	}
 }
 

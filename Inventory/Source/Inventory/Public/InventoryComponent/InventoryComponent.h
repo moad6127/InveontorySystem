@@ -7,9 +7,7 @@
 #include "InventoryComponent.generated.h"
 
 
-class UInventoryWidgetController;
-struct FWidgetControllerParams;
-
+struct FTile;
 class UItemObject;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -22,9 +20,6 @@ public:
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable)
-	UInventoryWidgetController* GetInventoryWidgetController(const FWidgetControllerParams& WCParams);
-
 	bool TryAddItems(UItemObject* InItem);
 
 
@@ -34,10 +29,9 @@ protected:
 
 private:
 
-	TObjectPtr<UInventoryWidgetController> InventoryWidgetController;
+	bool IsRoomAvailable(UItemObject* InItem,const int32 TopLeftIndex);
 
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UInventoryWidgetController> InventoryWidgetControllerClass;
+	FTile IndexToTile(const int32 Index) const;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta =(AllowPrivateAccess = "true"))
 	int32 Colums = 5;
@@ -47,4 +41,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = "Items", meta = (AllowPrivateAccess = "true"))
 	TArray<TObjectPtr<UItemObject>> InventoryItems;
+
+
+
+
 };
