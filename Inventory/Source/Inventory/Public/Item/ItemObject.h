@@ -17,10 +17,19 @@ class INVENTORY_API UItemObject : public UObject
 	GENERATED_BODY()
 public:
 
-	FIntPoint GetDimensions() const { return Dimensions; }
+	FIntPoint GetItemLocation() const { return Location; }
+	int32 GetSizeX() const { return SizeX; }
+	int32 GetSizeY() const { return SizeY; }
+ 	void SetItemLocation(FIntPoint InLocation);
 protected:
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemInfo", meta = (AllowPrivateAccess = "true"))
-	FIntPoint Dimensions;
+	int32 SizeX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemInfo", meta = (AllowPrivateAccess = "true"))
+	int32 SizeY;
+
+	UPROPERTY(BlueprintReadOnly, Category = "ItemInfo", meta = (AllowPrivateAccess = "true"))
+	FIntPoint Location;
 };

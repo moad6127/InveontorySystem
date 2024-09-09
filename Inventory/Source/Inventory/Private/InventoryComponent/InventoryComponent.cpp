@@ -6,7 +6,7 @@
 
 UInventoryComponent::UInventoryComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 }
 
@@ -17,34 +17,54 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 	{
 		return false;
 	}
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Colums; j++)
+		{
+			FIntPoint Location(i, j);
+			if (IsRoomAvailable(InItem, Location))
+			{
+				InItem->SetItemLocation(Location);
+				InventoryItems.Add(InItem);
+			}
+		}
+	}
 	return false;
 }
 
 
 void UInventoryComponent::BeginPlay()
 {
-	Super::BeginPlay();
-
-	
+	Super::BeginPlay();	
 }
 
-bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem,const int32 TopLeftIndex)
+bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation)
 {
-	return false;
+	FIntPoint BottomRight;
+	BottomRight.X = InLocation.X + InItem->GetSizeX() - 1;
+	BottomRight.Y = InLocation.Y + InItem->GetSizeY() - 1;
+	if (IsPositionValid(BottomRight))
+	{
+		return false;
+	}
+
+	return true;
 }
 
-FTile UInventoryComponent::IndexToTile(const int32 Index) const
+bool UInventoryComponent::IsPositionValid(FIntPoint InLocation)
 {
-	FTile Result;
-	Result.X = Index % Colums;
-	Result.Y = Index / Colums;
-	return Result;
+	// 아이템을 넣을때 해당 위치가 올바른지 확인
+	return InLocation.X >= 0 && InLocation.X < Colums &&
+		   InLocation.Y >= 0 && InLocation.Y < Rows;
 }
 
-
-void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+FIntPoint UInventoryComponent::IndexToPoint(int32 TopLeftIndex)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	FIntPoint Point;
+	Point.X = TopLeftIndex % Colums;
+	Point.Y = TopLeftIndex / Colums;
+	return Point;
 }
+
+
 

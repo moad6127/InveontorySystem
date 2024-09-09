@@ -3,3 +3,7 @@
 
 #include "Item/ItemObject.h"
 
+void UItemObject::SetItemLocation(FIntPoint InLocation)
+{
+	Location = InLocation;
+}

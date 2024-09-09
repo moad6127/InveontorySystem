@@ -18,8 +18,6 @@ class INVENTORY_API UInventoryComponent : public UActorComponent
 public:	
 	UInventoryComponent();
 
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 	bool TryAddItems(UItemObject* InItem);
 
 
@@ -29,9 +27,12 @@ protected:
 
 private:
 
-	bool IsRoomAvailable(UItemObject* InItem,const int32 TopLeftIndex);
+	bool IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation);
 
-	FTile IndexToTile(const int32 Index) const;
+	bool IsPositionValid(FIntPoint InLocation);
+
+	FIntPoint IndexToPoint(int32 TopLeftIndex);
+	void PointToIndex(int32 i, int32 j);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta =(AllowPrivateAccess = "true"))
 	int32 Colums = 5;
@@ -41,8 +42,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = "Items", meta = (AllowPrivateAccess = "true"))
 	TArray<TObjectPtr<UItemObject>> InventoryItems;
-
-
-
-
 };
