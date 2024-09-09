@@ -3,7 +3,35 @@
 
 #include "Item/ItemObject.h"
 
+UItemObject::UItemObject()
+{
+}
+
+UItemObject* UItemObject::CreateItemCopy()
+{
+	UItemObject* ItemCopy = NewObject<UItemObject>(StaticClass());
+	ItemCopy->ID = ID;
+	ItemCopy->ItemNumbericData = ItemNumbericData;
+	ItemCopy->Asset = Asset;
+	ItemCopy->ItemName = ItemName;
+	ItemCopy->SetItemSizeX(SizeX);
+	ItemCopy->SetItemSizeY(SizeY);
+	ItemCopy->SetItemLocation(Location);
+
+	return ItemCopy;
+}
+
 void UItemObject::SetItemLocation(FIntPoint InLocation)
 {
 	Location = InLocation;
+}
+
+void UItemObject::SetItemSizeX(int32 InSize)
+{
+	SizeX = InSize;
+}
+
+void UItemObject::SetItemSizeY(int32 InSize)
+{
+	SizeY = InSize;
 }

@@ -26,13 +26,14 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	
 
 	bool IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation);
 
 	bool IsPositionValid(FIntPoint InLocation);
 
 	FIntPoint IndexToPoint(int32 TopLeftIndex);
-	void PointToIndex(int32 i, int32 j);
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta =(AllowPrivateAccess = "true"))
 	int32 Colums = 5;

@@ -29,6 +29,8 @@ void AItemBase::InitializeItem(const TSubclassOf<UItemObject> BaseItem)
 {
 	ItemObject = NewObject<UItemObject>(this, BaseItem);
 	//TODO : ItemValueSet
+	ItemObject->SetItemSizeX(ItemSizeX);
+	ItemObject->SetItemSizeY(ItemSizeY);
 }
 
 void AItemBase::Tick(float DeltaTime)

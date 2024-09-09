@@ -30,8 +30,14 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> Sphere;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "ItemBase")
 	TObjectPtr<UItemObject> ItemObject;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
+	int32 ItemSizeX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
+	int32 ItemSizeY;
 
 private:
 	void InitializeItem(const TSubclassOf<UItemObject> BaseItem);

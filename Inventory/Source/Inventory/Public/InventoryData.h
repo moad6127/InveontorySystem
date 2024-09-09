@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "InventoryData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -26,4 +27,49 @@ struct FTile
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Y = 0;
+};
+
+USTRUCT()
+struct FItemNumericData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	int32 MaxStackSize;
+
+	UPROPERTY(EditAnywhere)
+	bool bIsStackable;
+
+	UPROPERTY(EditAnywhere)
+	bool bIsRotate;
+};
+
+USTRUCT()
+struct FItemAssetData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	UTexture2D* Icon;
+
+	UPROPERTY(EditAnywhere)
+	UStaticMesh* Mesh;
+};
+
+USTRUCT()
+struct FItemData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, Category = "Item Data")
+	FName ID;
+
+	UPROPERTY(EditAnywhere,Category = "Item Data")
+	FItemNumericData ItemNumbericData;
+
+	UPROPERTY(EditAnywhere, Category = "Item Data")
+	FItemAssetData Asset;
+
+	UPROPERTY(EditAnywhere, Category = "Item Data")
+	FText ItemName;
 };
