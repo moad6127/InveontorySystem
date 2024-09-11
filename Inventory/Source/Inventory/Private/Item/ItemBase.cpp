@@ -4,6 +4,7 @@
 #include "Item/ItemBase.h"
 #include "Components/SphereComponent.h"
 #include "Item/ItemObject.h"
+#include "InventoryData.h"
 #include "Interface/InventoryPlayerInterface.h"
 
 
@@ -27,10 +28,21 @@ void AItemBase::BeginPlay()
 
 void AItemBase::InitializeItem(const TSubclassOf<UItemObject> BaseItem)
 {
-	ItemObject = NewObject<UItemObject>(this, BaseItem);
-	//TODO : ItemValueSet
-	ItemObject->SetItemSizeX(ItemSizeX);
-	ItemObject->SetItemSizeY(ItemSizeY);
+	if (ItemDataTable && !DesiredItemID.IsNone())
+	{
+		const FItemData* ItemData = ItemDataTable->FindRow<FItemData>(DesiredItemID, DesiredItemID.ToString());
+		ItemObject = NewObject<UItemObject>(this, BaseItem);
+		//TODO : ItemValueSet
+		ItemObject->ID = ItemData->ID;
+		ItemObject->ItemNumbericData = ItemData->ItemNumbericData;
+		ItemObject->Asset = ItemData->Asset;
+		ItemObject->ItemName = ItemData->ItemName;
+		ItemObject->SetItemSizeX(ItemSizeX);
+		ItemObject->SetItemSizeY(ItemSizeY);
+
+		ItemMesh->SetStaticMesh(ItemData->Asset.Mesh);
+	}
+
 }
 
 void AItemBase::Tick(float DeltaTime)

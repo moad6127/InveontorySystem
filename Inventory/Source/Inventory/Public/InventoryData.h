@@ -53,6 +53,9 @@ struct FItemAssetData
 	UTexture2D* Icon;
 
 	UPROPERTY(EditAnywhere)
+	UTexture2D* IconRotated;
+
+	UPROPERTY(EditAnywhere)
 	UStaticMesh* Mesh;
 };
 

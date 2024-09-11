@@ -8,6 +8,7 @@
 
 class USphereComponent;
 class UItemObject;
+class UDataTable;
 
 UCLASS()
 class INVENTORY_API AItemBase : public AActor
@@ -32,6 +33,15 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "ItemBase")
 	TObjectPtr<UItemObject> ItemObject;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
+	TObjectPtr<UDataTable> ItemDataTable;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
+	FName DesiredItemID;
+
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
+	//int32 ItemQuantity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemBase")
 	int32 ItemSizeX;

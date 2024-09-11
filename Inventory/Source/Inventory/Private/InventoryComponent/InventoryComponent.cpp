@@ -19,13 +19,14 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 	}
 	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Colums; j++)
+		for (int j = 0; j < Columns; j++)
 		{
 			// TopLeft의 위치에 아이템이 들어올수 있는지 체크하기
 			FIntPoint Location(i, j);
 			if (IsRoomAvailable(InItem, Location))
 			{
 				//TODO : 인벤토리가 변했기 때문에 UI작업 하기
+				PlaceItem(InItem, Location);
 				InItem->SetItemLocation(Location);
 				InventoryItems.Add(InItem);
 			}
@@ -38,6 +39,12 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();	
+	InitializeInventory();
+}
+
+void UInventoryComponent::InitializeInventory()
+{
+	InventoryGrid.Init(false, Columns * Rows);
 }
 
 bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation)
@@ -57,14 +64,11 @@ bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocat
 	{
 		for (int j = InLocation.X; j < InLocation.X + InItem->GetSizeX() - 1; j++)
 		{
-			//인벤토리를 순회하면서 TopLeft부터 BottomRight까지 다른 아이템이 존재하면 
-			//False를 반환
-			for (UItemObject* Item : InventoryItems)
+			//인벤토리를 순회하면서 TopLeft부터 BottomRight까지 인벤토리Grid를 확인해서
+			// Grid가 1일경우 false반환하기
+			if (InventoryGrid[GetIndex(j,i)])
 			{
-				if (Item->GetItemLocation() == FIntPoint(i, j))
-				{
-					return false;
-				}
+				return false;
 			}
 		}
 	}
@@ -72,18 +76,29 @@ bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocat
 	return true;
 }
 
+void UInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
+{
+	for (int i = InLocation.Y; i < InLocation.Y + InItem->GetSizeY() - 1; i++)
+	{
+		for (int j = InLocation.X; j < InLocation.X + InItem->GetSizeX() - 1; j++)
+		{
+			InventoryGrid[GetIndex(j, i)] = true;
+		}
+	}
+}
+
 bool UInventoryComponent::IsPositionValid(FIntPoint InLocation)
 {
 	// 아이템을 넣을때 해당 위치가 올바른지 확인
-	return InLocation.X >= 0 && InLocation.X < Colums &&
+	return InLocation.X >= 0 && InLocation.X < Columns &&
 		   InLocation.Y >= 0 && InLocation.Y < Rows;
 }
 
 FIntPoint UInventoryComponent::IndexToPoint(int32 TopLeftIndex)
 {
 	FIntPoint Point;
-	Point.X = TopLeftIndex % Colums;
-	Point.Y = TopLeftIndex / Colums;
+	Point.X = TopLeftIndex % Columns;
+	Point.Y = TopLeftIndex / Columns;
 	return Point;
 }
 
