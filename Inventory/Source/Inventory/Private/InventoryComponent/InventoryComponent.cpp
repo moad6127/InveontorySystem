@@ -92,8 +92,8 @@ void UInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
 bool UInventoryComponent::IsPositionValid(FIntPoint InLocation)
 {
 	// 아이템을 넣을때 해당 위치가 올바른지 확인
-	return InLocation.X >= 0.f && InLocation.X < Columns &&
-		   InLocation.Y >= 0.f && InLocation.Y < Rows;
+	return InLocation.X >= 0.f && InLocation.X < Columns + 1 &&
+		   InLocation.Y >= 0.f && InLocation.Y < Rows + 1;
 }
 
 FIntPoint UInventoryComponent::IndexToPoint(int32 TopLeftIndex)

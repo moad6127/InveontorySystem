@@ -42,7 +42,7 @@ private:
 
 	FIntPoint IndexToPoint(int32 TopLeftIndex);
 
-	int32 GetIndex(int32 x, int32 y) const { return y * Rows + x; };
+	int32 GetIndex(int32 x, int32 y) const { return y * Columns + x; };
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Constants", meta =(AllowPrivateAccess = "true"))
 	int32 Columns = 5;
