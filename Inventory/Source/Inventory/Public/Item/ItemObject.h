@@ -17,7 +17,7 @@ class INVENTORY_API UItemObject : public UObject
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Data")
 	FName ID;
 
 	UPROPERTY(EditAnywhere, Category = "Item Data")
@@ -41,7 +41,7 @@ public:
 	void SetItemSizeY(int32 InSize);
 
 	UFUNCTION(BlueprintCallable)
-	UTexture2D* GetItemIcon();
+	UMaterialInstance* GetItemIcon();
 protected:
 
 	bool operator==(const FName& OtherID) const

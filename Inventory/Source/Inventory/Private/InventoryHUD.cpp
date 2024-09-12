@@ -29,7 +29,7 @@ void AInventoryHUD::InitHUD(APlayerController* PC, UInventoryComponent* Inventor
     InventoryWidget->SetWidgetController(WidgetController);
 
     InventoryWidget->AddToViewport();
-    InventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
+    InventoryWidget->SetVisibility(ESlateVisibility::Hidden);
     bIsInventoryVisible = false;
 }
 
@@ -62,7 +62,7 @@ void AInventoryHUD::HideInventory()
     if (InventoryWidget)
     {
         bIsInventoryVisible = false;
-        InventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
+        InventoryWidget->SetVisibility(ESlateVisibility::Hidden);
         const FInputModeGameOnly InputMode;
         GetOwningPlayerController()->SetInputMode(InputMode);
         GetOwningPlayerController()->SetShowMouseCursor(false);

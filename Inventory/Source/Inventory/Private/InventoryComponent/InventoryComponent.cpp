@@ -29,6 +29,7 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 				PlaceItem(InItem, Location);
 				InItem->SetItemItemLocation(Location);
 				InventoryItems.Add(InItem);
+				InventoryChanged.Broadcast();
 				return true;
 			}
 		}

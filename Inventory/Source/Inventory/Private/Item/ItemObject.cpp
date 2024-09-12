@@ -36,7 +36,7 @@ void UItemObject::SetItemSizeY(int32 InSize)
 	SizeY = InSize;
 }
 
-UTexture2D* UItemObject::GetItemIcon()
+UMaterialInstance* UItemObject::GetItemIcon()
 {
 	if (ItemNumbericData.bIsRotate)
 	{

@@ -17,7 +17,7 @@ class INVENTORY_API UInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-
+	UPROPERTY(BlueprintAssignable, Category = "InventoryComponent")
 	FInventoryChanged InventoryChanged;
 
 	UInventoryComponent();

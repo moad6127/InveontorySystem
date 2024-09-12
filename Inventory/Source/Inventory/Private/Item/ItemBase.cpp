@@ -58,6 +58,7 @@ void AItemBase::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 	{
 		if (Player->AddItem(ItemObject))
 		{
+			UE_LOG(LogTemp, Warning, TEXT("%s In"), *ItemObject->ItemName.ToString());
 			Destroy();
 		}
 	}
