@@ -16,14 +16,14 @@ UItemObject* UItemObject::CreateItemCopy()
 	ItemCopy->ItemName = ItemName;
 	ItemCopy->SetItemSizeX(SizeX);
 	ItemCopy->SetItemSizeY(SizeY);
-	ItemCopy->SetItemLocation(Location);
+	ItemCopy->SetItemItemLocation(ItemLocation);
 
 	return ItemCopy;
 }
 
-void UItemObject::SetItemLocation(FIntPoint InLocation)
+void UItemObject::SetItemItemLocation(FIntPoint InItemLocation)
 {
-	Location = InLocation;
+	ItemLocation = InItemLocation;
 }
 
 void UItemObject::SetItemSizeX(int32 InSize)
@@ -34,4 +34,13 @@ void UItemObject::SetItemSizeX(int32 InSize)
 void UItemObject::SetItemSizeY(int32 InSize)
 {
 	SizeY = InSize;
+}
+
+UTexture2D* UItemObject::GetItemIcon()
+{
+	if (ItemNumbericData.bIsRotate)
+	{
+		return Asset.IconRotated;
+	}
+	return Asset.Icon;
 }

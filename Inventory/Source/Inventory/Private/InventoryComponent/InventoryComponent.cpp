@@ -27,7 +27,7 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 			{
 				//TODO : 인벤토리가 변했기 때문에 UI작업 하기
 				PlaceItem(InItem, Location);
-				InItem->SetItemLocation(Location);
+				InItem->SetItemItemLocation(Location);
 				InventoryItems.Add(InItem);
 				return true;
 			}

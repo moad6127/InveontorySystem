@@ -12,7 +12,7 @@
  */
 
 
-UCLASS()
+UCLASS(BlueprintType, Blueprintable)
 class INVENTORY_API UItemObject : public UObject
 {
 	GENERATED_BODY()
@@ -33,12 +33,15 @@ public:
 
 	UItemObject* CreateItemCopy();
 
-	FIntPoint GetItemLocation() const { return Location; }
+	FIntPoint GetItemItemLocation() const { return ItemLocation; }
 	int32 GetSizeX() const { return SizeX; }
 	int32 GetSizeY() const { return SizeY; }
- 	void SetItemLocation(FIntPoint InLocation);
+ 	void SetItemItemLocation(FIntPoint InItemLocation);
 	void SetItemSizeX(int32 InSize);
 	void SetItemSizeY(int32 InSize);
+
+	UFUNCTION(BlueprintCallable)
+	UTexture2D* GetItemIcon();
 protected:
 
 	bool operator==(const FName& OtherID) const
@@ -54,5 +57,5 @@ private:
 	int32 SizeY;
 
 	UPROPERTY(BlueprintReadOnly, Category = "ItemInfo", meta = (AllowPrivateAccess = "true"))
-	FIntPoint Location;
+	FIntPoint ItemLocation;
 };

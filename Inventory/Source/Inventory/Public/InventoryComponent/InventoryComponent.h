@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "InventoryComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInventoryChanged);
 
 struct FTile;
 class UItemObject;
@@ -16,11 +17,14 @@ class INVENTORY_API UInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
+
+	FInventoryChanged InventoryChanged;
+
 	UInventoryComponent();
 
 	bool TryAddItems(UItemObject* InItem);
 
-
+	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
 	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
 protected:
 	virtual void BeginPlay() override;
