@@ -24,6 +24,8 @@ public:
 
 	bool TryAddItems(UItemObject* InItem);
 
+	bool RemoveItems(UItemObject* InItem);
+
 	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
 	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
 protected:
@@ -34,10 +36,23 @@ private:
 	UFUNCTION(BlueprintCallable, Category = "InventoryInit")
 	void InitializeInventory();
 
-	// 
+	/*
+	* 인벤토리에 아이템을 넣을때 넣을수 있는 공간이 존재 하는지 확인하는 함수
+	*/
 	bool IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation);
+	/*
+	* 아이템이 들어왔을때 InventoryGrid에 1을 넣어서 공간 채우기
+	*/
 	void PlaceItem(UItemObject* InItem, FIntPoint InLocation);
 
+	/*
+	* 아이템을 제거할때 InventoryGrid공간을 아이템 공간만큼 초기화 시키기
+	*/
+	void RePlaceItem(UItemObject* InItem);
+
+	/*
+	* 아이템의 BottomRight가 인벤토리 공간 범위를 넘어가는지 확인하기
+	*/
 	bool IsPositionValid(FIntPoint InLocation);
 
 	FIntPoint IndexToPoint(int32 TopLeftIndex);

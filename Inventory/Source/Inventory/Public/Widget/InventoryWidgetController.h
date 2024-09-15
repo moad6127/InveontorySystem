@@ -11,7 +11,7 @@
  */
 
 class UInventoryComponent;
-
+class UItemObject;
 
 USTRUCT(BlueprintType)
 struct FWidgetControllerParams

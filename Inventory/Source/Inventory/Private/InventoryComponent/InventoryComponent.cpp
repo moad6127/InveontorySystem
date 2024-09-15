@@ -37,6 +37,22 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 	return false;
 }
 
+bool UInventoryComponent::RemoveItems(UItemObject* InItem)
+{
+	if (!IsValid(InItem))
+	{
+		return false;
+	}
+	if (InventoryItems.Contains(InItem))
+	{
+		//TODO : 만약 Stackable아이템이면 아이템 수에서 -1하기
+		InventoryItems.Remove(InItem);
+		RePlaceItem(InItem);
+		InventoryChanged.Broadcast();
+	}
+	return false;
+}
+
 
 void UInventoryComponent::BeginPlay()
 {
@@ -85,6 +101,18 @@ void UInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
 		for (int32 j = InLocation.X; j < InLocation.X + InItem->GetSizeX(); j++)
 		{
 			InventoryGrid[GetIndex(j, i)] = true;
+		}
+	}
+}
+
+void UInventoryComponent::RePlaceItem(UItemObject* InItem)
+{
+	FIntPoint InLocation = InItem->GetItemItemLocation();
+	for (int32 i = InLocation.Y; i < InLocation.Y + InItem->GetSizeY(); i++)
+	{
+		for (int32 j = InLocation.X; j < InLocation.X + InItem->GetSizeX(); j++)
+		{
+			InventoryGrid[GetIndex(j, i)] = false;
 		}
 	}
 }
