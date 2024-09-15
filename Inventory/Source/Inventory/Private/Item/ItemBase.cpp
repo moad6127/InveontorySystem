@@ -13,10 +13,12 @@ AItemBase::AItemBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>("ItemMesh");
-	ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ItemMesh->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	ItemMesh->SetSimulatePhysics(true);
 
 	Sphere = CreateDefaultSubobject<USphereComponent>("ItemCollision");
 	Sphere->SetupAttachment(ItemMesh);
+
 }
 
 void AItemBase::BeginPlay()
@@ -62,5 +64,12 @@ void AItemBase::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 			Destroy();
 		}
 	}
+}
+
+void AItemBase::InitializeDrop(UItemObject* ItemToDrop)
+{
+	ItemObject = ItemToDrop;
+
+	ItemMesh->SetStaticMesh(ItemToDrop->Asset.Mesh);
 }
 

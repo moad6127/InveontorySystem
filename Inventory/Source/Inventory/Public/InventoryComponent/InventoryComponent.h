@@ -26,6 +26,8 @@ public:
 
 	bool RemoveItems(UItemObject* InItem);
 
+	void DropItem(UItemObject* ItemToDrop);
+
 	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
 	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
 protected:

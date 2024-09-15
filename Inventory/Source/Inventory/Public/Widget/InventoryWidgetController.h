@@ -40,6 +40,12 @@ public:
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 
 	UFUNCTION(BlueprintCallable)
+	bool RemoveItem(UItemObject* InItem);
+
+	UFUNCTION(BlueprintCallable)
+	void DropItem(UItemObject* ItemToDrop);
+
+	UFUNCTION(BlueprintCallable)
 	APlayerController* GetPlayerController() { return PlayerController; }
 
 	UFUNCTION(BlueprintCallable)

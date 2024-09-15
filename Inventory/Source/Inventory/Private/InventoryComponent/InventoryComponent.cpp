@@ -2,6 +2,7 @@
 #include "InventoryComponent/InventoryComponent.h"
 #include "Item/ItemObject.h"
 #include "InventoryData.h"
+#include "Item/ItemBase.h"
 
 
 UInventoryComponent::UInventoryComponent()
@@ -49,8 +50,24 @@ bool UInventoryComponent::RemoveItems(UItemObject* InItem)
 		InventoryItems.Remove(InItem);
 		RePlaceItem(InItem);
 		InventoryChanged.Broadcast();
+		return true;
 	}
 	return false;
+}
+
+void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
+{
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = GetOwner();
+	SpawnParams.bNoFail = true;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	const FVector SpawnLocation{ GetOwner()->GetActorLocation() + (GetOwner()->GetActorForwardVector() * 50.f) };
+	const FTransform SpawnTransform(GetOwner()->GetActorRotation(), SpawnLocation);
+
+	AItemBase* DropItem = GetWorld()->SpawnActor<AItemBase>(AItemBase::StaticClass(), SpawnTransform, SpawnParams);
+
+	DropItem->InitializeDrop(ItemToDrop);
 }
 
 
