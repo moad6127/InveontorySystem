@@ -27,3 +27,15 @@ void UInventoryWidgetController::DropItem(UItemObject* ItemToDrop)
 		GetInventoryComponent()->DropItem(ItemToDrop);
 	}
 }
+
+bool UInventoryWidgetController::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation)
+{
+	if (GetInventoryComponent())
+	{
+		if (GetInventoryComponent()->ReplaceItem(ItemToReplace, InLocation))
+		{
+			return true;
+		}
+	}
+	return false;
+}

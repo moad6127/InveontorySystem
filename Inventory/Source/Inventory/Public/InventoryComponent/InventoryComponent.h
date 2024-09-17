@@ -28,6 +28,8 @@ public:
 
 	void DropItem(UItemObject* ItemToDrop);
 
+	bool ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation);
+
 	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
 	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
 protected:
@@ -50,7 +52,7 @@ private:
 	/*
 	* 아이템을 제거할때 InventoryGrid공간을 아이템 공간만큼 초기화 시키기
 	*/
-	void RePlaceItem(UItemObject* InItem);
+	void RemovePlaceItem(UItemObject* InItem);
 
 	/*
 	* 아이템의 BottomRight가 인벤토리 공간 범위를 넘어가는지 확인하기

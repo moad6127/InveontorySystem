@@ -48,7 +48,7 @@ bool UInventoryComponent::RemoveItems(UItemObject* InItem)
 	{
 		//TODO : 만약 Stackable아이템이면 아이템 수에서 -1하기
 		InventoryItems.Remove(InItem);
-		RePlaceItem(InItem);
+		RemovePlaceItem(InItem);
 		InventoryChanged.Broadcast();
 		return true;
 	}
@@ -68,6 +68,24 @@ void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
 	AItemBase* DropItem = GetWorld()->SpawnActor<AItemBase>(AItemBase::StaticClass(), SpawnTransform, SpawnParams);
 
 	DropItem->InitializeDrop(ItemToDrop);
+}
+
+bool UInventoryComponent::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation)
+{
+	if (!IsValid(ItemToReplace))
+	{
+		return false;
+	}
+	if (IsRoomAvailable(ItemToReplace, InLocation))
+	{
+		//TODO : 인벤토리가 변했기 때문에 UI작업 하기
+		PlaceItem(ItemToReplace, InLocation);
+		ItemToReplace->SetItemItemLocation(InLocation);
+		InventoryItems.Add(ItemToReplace);
+		InventoryChanged.Broadcast();
+		return true;
+	}
+	return false;
 }
 
 
@@ -122,7 +140,7 @@ void UInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
 	}
 }
 
-void UInventoryComponent::RePlaceItem(UItemObject* InItem)
+void UInventoryComponent::RemovePlaceItem(UItemObject* InItem)
 {
 	FIntPoint InLocation = InItem->GetItemItemLocation();
 	for (int32 i = InLocation.Y; i < InLocation.Y + InItem->GetSizeY(); i++)

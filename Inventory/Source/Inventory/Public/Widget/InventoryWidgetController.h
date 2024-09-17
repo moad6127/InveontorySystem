@@ -46,6 +46,9 @@ public:
 	void DropItem(UItemObject* ItemToDrop);
 
 	UFUNCTION(BlueprintCallable)
+	bool ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation);
+
+	UFUNCTION(BlueprintCallable)
 	APlayerController* GetPlayerController() { return PlayerController; }
 
 	UFUNCTION(BlueprintCallable)
