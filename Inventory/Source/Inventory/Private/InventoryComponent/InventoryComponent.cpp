@@ -103,9 +103,14 @@ void UInventoryComponent::InitializeInventory()
 bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation)
 {
 	// BottomRight가 인벤토리 범위를 넘어가는지 확인하기
+	
 	int32 BottomRightX = InLocation.X + InItem->GetSizeX();
 	int32 BottomRightY = InLocation.Y + InItem->GetSizeY();
 	FIntPoint BottomRight(BottomRightX, BottomRightY);
+	if (!IsPositionValid(InLocation))
+	{
+		return false;
+	}
 	if (!IsPositionValid(BottomRight))
 	{
 		return false;
@@ -155,8 +160,7 @@ void UInventoryComponent::RemovePlaceItem(UItemObject* InItem)
 bool UInventoryComponent::IsPositionValid(FIntPoint InLocation)
 {
 	// 아이템을 넣을때 해당 위치가 올바른지 확인
-	return InLocation.X >= 0 && InLocation.X <= Columns&&
-		   InLocation.Y >= 0 && InLocation.Y <= Rows;
+	return InLocation.X >= 0 && InLocation.X <= Columns && InLocation.Y >= 0 && InLocation.Y <= Rows;
 }
 
 FIntPoint UInventoryComponent::IndexToPoint(int32 TopLeftIndex)
