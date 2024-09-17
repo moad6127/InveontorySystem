@@ -49,6 +49,9 @@ public:
 	bool ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation);
 
 	UFUNCTION(BlueprintCallable)
+	void MousePositionInTile(const FVector2D MousePosition, bool& Right, bool& Down);
+
+	UFUNCTION(BlueprintCallable)
 	APlayerController* GetPlayerController() { return PlayerController; }
 
 	UFUNCTION(BlueprintCallable)

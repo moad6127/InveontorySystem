@@ -39,3 +39,15 @@ bool UInventoryWidgetController::ReplaceItem(UItemObject* ItemToReplace, FIntPoi
 	}
 	return false;
 }
+
+void UInventoryWidgetController::MousePositionInTile(const FVector2D MousePosition, bool& Right, bool& Down)
+{
+	Right = false;
+	Down = false;
+
+	float MousePositionX = MousePosition.X;
+	float MousePositionY = MousePosition.Y;
+
+	Right = fmod(MousePositionX,TileSize) > (TileSize / 2);
+	Down = fmod(MousePositionY, TileSize) > (TileSize / 2);
+}
