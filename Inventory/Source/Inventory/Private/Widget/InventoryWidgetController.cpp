@@ -11,6 +11,15 @@ void UInventoryWidgetController::SetWidgetControllerParams(const FWidgetControll
 	InventoryComponent = WCParams.InventoryComponent;
 }
 
+bool UInventoryWidgetController::TryAddItem(UItemObject* InItem)
+{
+	if (GetInventoryComponent()->TryAddItems(InItem))
+	{
+		return true;
+	}
+	return false;
+}
+
 bool UInventoryWidgetController::RemoveItem(UItemObject* InItem)
 {
 	if (GetInventoryComponent()->RemoveItems(InItem))

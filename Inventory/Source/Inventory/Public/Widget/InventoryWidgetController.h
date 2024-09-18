@@ -40,6 +40,9 @@ public:
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 
 	UFUNCTION(BlueprintCallable)
+	bool TryAddItem(UItemObject* InItem);
+
+	UFUNCTION(BlueprintCallable)
 	bool RemoveItem(UItemObject* InItem);
 
 	UFUNCTION(BlueprintCallable)
