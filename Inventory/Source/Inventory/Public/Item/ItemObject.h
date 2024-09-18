@@ -35,10 +35,12 @@ public:
 
 	FIntPoint GetItemItemLocation() const { return ItemLocation; }
 	int32 GetSizeX() const { return SizeX; }
-	int32 GetSizeY() const { return SizeY; }
+	int32 GetSizeY() const { return SizeY; };
  	void SetItemItemLocation(FIntPoint InItemLocation);
 	void SetItemSizeX(int32 InSize);
 	void SetItemSizeY(int32 InSize);
+
+	void Rotate();
 
 	UFUNCTION(BlueprintCallable)
 	UMaterialInstance* GetItemIcon();

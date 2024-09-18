@@ -36,6 +36,12 @@ void UItemObject::SetItemSizeY(int32 InSize)
 	SizeY = InSize;
 }
 
+void UItemObject::Rotate()
+{
+	ItemNumbericData.bIsRotate = !ItemNumbericData.bIsRotate;
+	Swap(SizeX, SizeY);
+}
+
 UMaterialInstance* UItemObject::GetItemIcon()
 {
 	if (ItemNumbericData.bIsRotate)

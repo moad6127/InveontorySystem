@@ -49,7 +49,13 @@ public:
 	void DropItem(UItemObject* ItemToDrop);
 
 	UFUNCTION(BlueprintCallable)
+	void RotateItem(UItemObject* ItemToRotate);
+
+	UFUNCTION(BlueprintCallable)
 	bool ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation);
+
+	UFUNCTION(BlueprintCallable)
+	bool IsRoomAvailable(UItemObject* Payload, FIntPoint Location);
 
 	UFUNCTION(BlueprintCallable)
 	void MousePositionInTile(const FVector2D MousePosition, bool& Right, bool& Down);

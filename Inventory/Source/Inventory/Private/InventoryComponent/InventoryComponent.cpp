@@ -26,7 +26,6 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 			FIntPoint Location(j,i);
 			if (IsRoomAvailable(InItem, Location))
 			{
-				//TODO : 인벤토리가 변했기 때문에 UI작업 하기
 				PlaceItem(InItem, Location);
 				InItem->SetItemItemLocation(Location);
 				InventoryItems.Add(InItem);
@@ -57,16 +56,19 @@ bool UInventoryComponent::RemoveItems(UItemObject* InItem)
 
 void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
 {
+	// SpawnParasm를 생성한후 설정해주기
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = GetOwner();
 	SpawnParams.bNoFail = true;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
+	//위치를 정해주기 위치는 현재 Component를 가지고 있는 Actor앞의 50정도 위치
 	const FVector SpawnLocation{ GetOwner()->GetActorLocation() + (GetOwner()->GetActorForwardVector() * 50.f) };
 	const FTransform SpawnTransform(GetOwner()->GetActorRotation(), SpawnLocation);
 
 	AItemBase* DropItem = GetWorld()->SpawnActor<AItemBase>(AItemBase::StaticClass(), SpawnTransform, SpawnParams);
 
+	//Drop아이템에 대해서 Initialize해주기
 	DropItem->InitializeDrop(ItemToDrop);
 }
 
@@ -78,7 +80,6 @@ bool UInventoryComponent::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLo
 	}
 	if (IsRoomAvailable(ItemToReplace, InLocation))
 	{
-		//TODO : 인벤토리가 변했기 때문에 UI작업 하기
 		PlaceItem(ItemToReplace, InLocation);
 		ItemToReplace->SetItemItemLocation(InLocation);
 		InventoryItems.Add(ItemToReplace);
@@ -98,6 +99,12 @@ void UInventoryComponent::BeginPlay()
 void UInventoryComponent::InitializeInventory()
 {
 	InventoryGrid.Init(false, Columns * Rows);
+}
+
+void UInventoryComponent::RotateItem(UItemObject* ItemToRotate)
+{
+	ItemToRotate->Rotate();
+	InventoryChanged.Broadcast();
 }
 
 bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation)

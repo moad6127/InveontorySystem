@@ -37,11 +37,31 @@ void UInventoryWidgetController::DropItem(UItemObject* ItemToDrop)
 	}
 }
 
+void UInventoryWidgetController::RotateItem(UItemObject* ItemToRotate)
+{
+	if (GetInventoryComponent())
+	{
+		GetInventoryComponent()->RotateItem(ItemToRotate);
+	}
+}
+
 bool UInventoryWidgetController::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation)
 {
 	if (GetInventoryComponent())
 	{
 		if (GetInventoryComponent()->ReplaceItem(ItemToReplace, InLocation))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool UInventoryWidgetController::IsRoomAvailable(UItemObject* Payload, FIntPoint Location)
+{
+	if (GetInventoryComponent())
+	{
+		if (GetInventoryComponent()->IsRoomAvailable(Payload, Location))
 		{
 			return true;
 		}
