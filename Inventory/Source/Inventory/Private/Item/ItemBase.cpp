@@ -36,6 +36,7 @@ void AItemBase::InitializeItem(const TSubclassOf<UItemObject> BaseItem)
 		ItemObject = NewObject<UItemObject>(this, BaseItem);
 		//TODO : ItemValueSet
 		ItemObject->ID = ItemData->ID;
+		ItemObject->SlotType = ItemData->SlotType;
 		ItemObject->ItemNumbericData = ItemData->ItemNumbericData;
 		ItemObject->Asset = ItemData->Asset;
 		ItemObject->ItemName = ItemData->ItemName;

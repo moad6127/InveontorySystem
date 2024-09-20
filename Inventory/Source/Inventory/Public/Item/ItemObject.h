@@ -20,6 +20,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Data")
 	FName ID;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Data")
+	EEquipmentSlotType SlotType;
+
 	UPROPERTY(EditAnywhere, Category = "Item Data")
 	FItemNumericData ItemNumbericData;
 

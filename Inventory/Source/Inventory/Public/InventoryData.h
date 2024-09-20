@@ -59,6 +59,19 @@ struct FItemAssetData
 	UStaticMesh* Mesh;
 };
 
+UENUM()
+enum class EEquipmentSlotType : uint8
+{
+	EEST_None UMETA(DisplayName = "None"),
+	EEST_Head UMETA(DisplayName = "Head"),
+	EEST_Chest UMETA(DisplayName = "Chest"),
+	EEST_Backpack UMETA(DisplayName = "Backpack"),
+	EEST_Weapon UMETA(DisplayName = "Weapon"),
+
+	EEST_Max UMETA(DisplayName = "DefaultMAX")
+
+};
+
 USTRUCT()
 struct FItemData : public FTableRowBase
 {
@@ -66,6 +79,9 @@ struct FItemData : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, Category = "Item Data")
 	FName ID;
+
+	UPROPERTY(EditAnywhere, Category = "Item Data")
+	EEquipmentSlotType SlotType;
 
 	UPROPERTY(EditAnywhere,Category = "Item Data")
 	FItemNumericData ItemNumbericData;

@@ -11,6 +11,7 @@ UItemObject* UItemObject::CreateItemCopy()
 {
 	UItemObject* ItemCopy = NewObject<UItemObject>(StaticClass());
 	ItemCopy->ID = ID;
+	ItemCopy->SlotType = SlotType;
 	ItemCopy->ItemNumbericData = ItemNumbericData;
 	ItemCopy->Asset = Asset;
 	ItemCopy->ItemName = ItemName;
