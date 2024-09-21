@@ -59,7 +59,7 @@ struct FItemAssetData
 	UStaticMesh* Mesh;
 };
 
-UENUM()
+UENUM(BlueprintType)
 enum class EEquipmentSlotType : uint8
 {
 	EEST_None UMETA(DisplayName = "None"),

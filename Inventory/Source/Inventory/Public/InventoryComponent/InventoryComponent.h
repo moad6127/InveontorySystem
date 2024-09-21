@@ -54,6 +54,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
 	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
+
+	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
+	TMap<EEquipmentSlotType, UItemObject*> GetEquipmentItems() const { return EquipmentItems; }
 protected:
 	virtual void BeginPlay() override;
 
@@ -90,6 +93,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = "Items", meta = (AllowPrivateAccess = "true"))
 	TArray<TObjectPtr<UItemObject>> InventoryItems;
+
+	UPROPERTY(VisibleAnywhere, Category = "Equipment", meta = (AllowPrivateAccess = "true"))
+	TMap<EEquipmentSlotType, UItemObject*> EquipmentItems;
 
 	UPROPERTY()
 	TArray<bool> InventoryGrid;
