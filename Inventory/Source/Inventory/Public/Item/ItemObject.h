@@ -43,6 +43,12 @@ public:
 	void SetItemSizeX(int32 InSize);
 	void SetItemSizeY(int32 InSize);
 
+	UFUNCTION(BlueprintCallable)
+	FText GetItemName() const { return ItemName; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetRotateState() const { return ItemNumbericData.bIsRotate; }
+
 	void Rotate();
 
 	UFUNCTION(BlueprintCallable)
