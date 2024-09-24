@@ -80,7 +80,8 @@ void UInventoryComponent::UnEquipItem(EEquipmentSlotType SlotType)
 	{
 		EquipItem->SlotType = EEquipmentSlotType::EEST_Weapon;
 	}
-	EquipmentItems.Remove(EquipItem->SlotType);
+	// 제거하는것은 들어온것의 SlotType을 제거한다
+	EquipmentItems.Remove(SlotType);
 }
 
 void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
