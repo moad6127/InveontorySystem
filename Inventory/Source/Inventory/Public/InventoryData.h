@@ -67,6 +67,8 @@ enum class EEquipmentSlotType : uint8
 	EEST_Chest UMETA(DisplayName = "Chest"),
 	EEST_Backpack UMETA(DisplayName = "Backpack"),
 	EEST_Weapon UMETA(DisplayName = "Weapon"),
+	EEST_Weapon1 UMETA(DisplayName = "Weapon1"),
+	EEST_Weapon2 UMETA(DisplayName = "Weapon2"),
 
 	EEST_Max UMETA(DisplayName = "DefaultMAX")
 

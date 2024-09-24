@@ -54,6 +54,35 @@ bool UInventoryComponent::RemoveItems(UItemObject* InItem)
 	return false;
 }
 
+void UInventoryComponent::EquipItem(UItemObject* InItem)
+{
+	EEquipmentSlotType ItemSlot = InItem->SlotType;
+	if (EquipmentItems.Contains(ItemSlot))
+	{
+		UnEquipItem(ItemSlot);
+	}
+	else
+	{
+		EquipmentItems.Add({ ItemSlot,InItem });
+	}
+}
+
+void UInventoryComponent::UnEquipItem(EEquipmentSlotType SlotType)
+{
+	if (!EquipmentItems.Contains(SlotType))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Not have item in EquipmentItems!!"));
+		return;
+	}
+	UItemObject* EquipItem = EquipmentItems[SlotType];
+	// Equip창에 Slot을 구분하기위해 Weapon은 1과 2로 나누었다.
+	if (SlotType == EEquipmentSlotType::EEST_Weapon1 || SlotType == EEquipmentSlotType::EEST_Weapon2)
+	{
+		EquipItem->SlotType = EEquipmentSlotType::EEST_Weapon;
+	}
+	EquipmentItems.Remove(EquipItem->SlotType);
+}
+
 void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
 {
 	// SpawnParasm를 생성한후 설정해주기

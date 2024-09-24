@@ -37,6 +37,23 @@ void UInventoryWidgetController::DropItem(UItemObject* ItemToDrop)
 	}
 }
 
+void UInventoryWidgetController::EquipItem(UItemObject* InItem)
+{
+	if (GetInventoryComponent())
+	{
+		GetInventoryComponent()->EquipItem(InItem);
+	}
+}
+
+void UInventoryWidgetController::UnEquipItem(UItemObject* ItemToUnEquip)
+{
+	if (GetInventoryComponent())
+	{
+		EEquipmentSlotType SlotType = ItemToUnEquip->SlotType;
+		GetInventoryComponent()->UnEquipItem(SlotType);
+	}
+}
+
 void UInventoryWidgetController::RotateItem(UItemObject* ItemToRotate)
 {
 	if (GetInventoryComponent())

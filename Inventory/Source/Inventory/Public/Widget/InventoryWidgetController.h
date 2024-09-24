@@ -49,6 +49,12 @@ public:
 	void DropItem(UItemObject* ItemToDrop);
 
 	UFUNCTION(BlueprintCallable)
+	void EquipItem(UItemObject* InItem);
+	
+	UFUNCTION(BlueprintCallable)
+	void UnEquipItem(UItemObject* ItemToUnEquip);
+
+	UFUNCTION(BlueprintCallable)
 	void RotateItem(UItemObject* ItemToRotate);
 
 	UFUNCTION(BlueprintCallable)

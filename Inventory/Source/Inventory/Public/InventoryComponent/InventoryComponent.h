@@ -33,6 +33,15 @@ public:
 	bool RemoveItems(UItemObject* InItem);
 
 	/*
+	* 아이템 장착 함수
+	*/
+	void EquipItem(UItemObject* InItem);
+	/*
+	* 아이템 장착 해제 함수
+	*/
+	void UnEquipItem(EEquipmentSlotType SlotType);
+
+	/*
 	* 아이템을 Drop할때 사용되는 함수
 	*/
 	void DropItem(UItemObject* ItemToDrop);
