@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "InventoryComponent.generated.h"
+#include "SInventoryComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInventoryChanged);
 
@@ -12,15 +12,15 @@ struct FTile;
 class UItemObject;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class INVENTORY_API UInventoryComponent : public UActorComponent
+class INVENTORY_API USInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	UPROPERTY(BlueprintAssignable, Category = "InventoryComponent")
+	UPROPERTY(BlueprintAssignable, Category = "SInventoryComponent")
 	FInventoryChanged InventoryChanged;
 
-	UInventoryComponent();
+	USInventoryComponent();
 
 	/*
 	* 아이템을 추가시키는 함수
@@ -61,10 +61,10 @@ public:
 	*/
 	bool IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation);
 
-	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
+	UFUNCTION(BlueprintCallable, Category = "SInventoryComponent")
 	TArray<UItemObject*> GetInventoryItems() const { return InventoryItems; }
 
-	UFUNCTION(BlueprintCallable, Category = "InventoryComponent")
+	UFUNCTION(BlueprintCallable, Category = "SInventoryComponent")
 	TMap<EEquipmentSlotType, UItemObject*> GetEquipmentItems() const { return EquipmentItems; }
 protected:
 	virtual void BeginPlay() override;

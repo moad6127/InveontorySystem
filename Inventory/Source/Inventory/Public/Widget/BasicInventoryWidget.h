@@ -11,7 +11,7 @@
  */
 
 class UUniformGridPanel;
-class UInventoryComponent;
+class USInventoryComponent;
 
 UCLASS()
 class INVENTORY_API UBasicInventoryWidget : public UUserWidget

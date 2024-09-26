@@ -1,18 +1,18 @@
 
-#include "InventoryComponent/InventoryComponent.h"
+#include "InventoryComponent/SInventoryComponent.h"
 #include "Item/ItemObject.h"
 #include "InventoryData.h"
 #include "Item/ItemBase.h"
 
 
-UInventoryComponent::UInventoryComponent()
+USInventoryComponent::USInventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
 }
 
 
-bool UInventoryComponent::TryAddItems(UItemObject* InItem)
+bool USInventoryComponent::TryAddItems(UItemObject* InItem)
 {
 	if (!IsValid(InItem))
 	{
@@ -37,7 +37,7 @@ bool UInventoryComponent::TryAddItems(UItemObject* InItem)
 	return false;
 }
 
-bool UInventoryComponent::RemoveItems(UItemObject* InItem)
+bool USInventoryComponent::RemoveItems(UItemObject* InItem)
 {
 	if (!IsValid(InItem))
 	{
@@ -54,7 +54,7 @@ bool UInventoryComponent::RemoveItems(UItemObject* InItem)
 	return false;
 }
 
-void UInventoryComponent::EquipItem(UItemObject* InItem)
+void USInventoryComponent::EquipItem(UItemObject* InItem)
 {
 	EEquipmentSlotType ItemSlot = InItem->SlotType;
 	if (EquipmentItems.Contains(ItemSlot))
@@ -67,7 +67,7 @@ void UInventoryComponent::EquipItem(UItemObject* InItem)
 	}
 }
 
-void UInventoryComponent::UnEquipItem(EEquipmentSlotType SlotType)
+void USInventoryComponent::UnEquipItem(EEquipmentSlotType SlotType)
 {
 	if (!EquipmentItems.Contains(SlotType))
 	{
@@ -84,7 +84,7 @@ void UInventoryComponent::UnEquipItem(EEquipmentSlotType SlotType)
 	EquipmentItems.Remove(SlotType);
 }
 
-void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
+void USInventoryComponent::DropItem(UItemObject* ItemToDrop)
 {
 	// SpawnParasm를 생성한후 설정해주기
 	FActorSpawnParameters SpawnParams;
@@ -102,7 +102,7 @@ void UInventoryComponent::DropItem(UItemObject* ItemToDrop)
 	DropItem->InitializeDrop(ItemToDrop);
 }
 
-bool UInventoryComponent::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation)
+bool USInventoryComponent::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation)
 {
 	if (!IsValid(ItemToReplace))
 	{
@@ -120,24 +120,24 @@ bool UInventoryComponent::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLo
 }
 
 
-void UInventoryComponent::BeginPlay()
+void USInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();	
 	InitializeInventory();
 }
 
-void UInventoryComponent::InitializeInventory()
+void USInventoryComponent::InitializeInventory()
 {
 	InventoryGrid.Init(false, Columns * Rows);
 }
 
-void UInventoryComponent::RotateItem(UItemObject* ItemToRotate)
+void USInventoryComponent::RotateItem(UItemObject* ItemToRotate)
 {
 	ItemToRotate->Rotate();
 	InventoryChanged.Broadcast();
 }
 
-bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation)
+bool USInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocation)
 {
 	// BottomRight가 인벤토리 범위를 넘어가는지 확인하기
 	
@@ -171,7 +171,7 @@ bool UInventoryComponent::IsRoomAvailable(UItemObject* InItem, FIntPoint InLocat
 	return true;
 }
 
-void UInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
+void USInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
 {
 	for (int32 i = InLocation.Y; i < InLocation.Y + InItem->GetSizeY(); i++)
 	{
@@ -182,7 +182,7 @@ void UInventoryComponent::PlaceItem(UItemObject* InItem, FIntPoint InLocation)
 	}
 }
 
-void UInventoryComponent::RemovePlaceItem(UItemObject* InItem)
+void USInventoryComponent::RemovePlaceItem(UItemObject* InItem)
 {
 	FIntPoint InLocation = InItem->GetItemItemLocation();
 	for (int32 i = InLocation.Y; i < InLocation.Y + InItem->GetSizeY(); i++)
@@ -194,13 +194,13 @@ void UInventoryComponent::RemovePlaceItem(UItemObject* InItem)
 	}
 }
 
-bool UInventoryComponent::IsPositionValid(FIntPoint InLocation)
+bool USInventoryComponent::IsPositionValid(FIntPoint InLocation)
 {
 	// 아이템을 넣을때 해당 위치가 올바른지 확인
 	return InLocation.X >= 0 && InLocation.X <= Columns && InLocation.Y >= 0 && InLocation.Y <= Rows;
 }
 
-FIntPoint UInventoryComponent::IndexToPoint(int32 TopLeftIndex)
+FIntPoint USInventoryComponent::IndexToPoint(int32 TopLeftIndex)
 {
 	FIntPoint Point;
 	Point.X = TopLeftIndex % Columns;

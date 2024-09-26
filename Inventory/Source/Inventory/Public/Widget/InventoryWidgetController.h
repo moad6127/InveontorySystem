@@ -10,7 +10,7 @@
  * 
  */
 
-class UInventoryComponent;
+class USInventoryComponent;
 class UItemObject;
 
 USTRUCT(BlueprintType)
@@ -20,14 +20,14 @@ struct FWidgetControllerParams
 
 
 	FWidgetControllerParams() {}
-	FWidgetControllerParams(APlayerController* PC, UInventoryComponent* InvenComp)
-		:PlayerController(PC), InventoryComponent(InvenComp) {}
+	FWidgetControllerParams(APlayerController* PC, USInventoryComponent* InvenComp)
+		:PlayerController(PC), SInventoryComponent(InvenComp) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<APlayerController> PlayerController = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<UInventoryComponent> InventoryComponent = nullptr;
+	TObjectPtr<USInventoryComponent> SInventoryComponent = nullptr;
 };
 
 UCLASS(BlueprintType, Blueprintable)
@@ -70,14 +70,14 @@ public:
 	APlayerController* GetPlayerController() { return PlayerController; }
 
 	UFUNCTION(BlueprintCallable)
-	UInventoryComponent* GetInventoryComponent() { return InventoryComponent; }
+	USInventoryComponent* GetSInventoryComponent() { return SInventoryComponent; }
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
 	TObjectPtr<APlayerController> PlayerController;
 
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
-	TObjectPtr<UInventoryComponent> InventoryComponent;
+	TObjectPtr<USInventoryComponent> SInventoryComponent;
 
 private:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

@@ -29,7 +29,7 @@ class INVENTORY_API AThirdCharacter : public ACharacter, public IInventoryPlayer
 	class UInputMappingContext* DefaultMappingContext;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
-	class UInventoryComponent* InventoryComponent;
+	class USInventoryComponent* SInventoryComponent;
 
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))

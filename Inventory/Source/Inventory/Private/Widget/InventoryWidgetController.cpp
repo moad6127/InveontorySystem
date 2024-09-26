@@ -2,18 +2,18 @@
 
 
 #include "Widget/InventoryWidgetController.h"
-#include "InventoryComponent/InventoryComponent.h"
+#include "InventoryComponent/SInventoryComponent.h"
 #include "Item/ItemObject.h"
 
 void UInventoryWidgetController::SetWidgetControllerParams(const FWidgetControllerParams& WCParams)
 {
 	PlayerController = WCParams.PlayerController;
-	InventoryComponent = WCParams.InventoryComponent;
+	SInventoryComponent = WCParams.SInventoryComponent;
 }
 
 bool UInventoryWidgetController::TryAddItem(UItemObject* InItem)
 {
-	if (GetInventoryComponent()->TryAddItems(InItem))
+	if (GetSInventoryComponent()->TryAddItems(InItem))
 	{
 		return true;
 	}
@@ -22,7 +22,7 @@ bool UInventoryWidgetController::TryAddItem(UItemObject* InItem)
 
 bool UInventoryWidgetController::RemoveItem(UItemObject* InItem)
 {
-	if (GetInventoryComponent()->RemoveItems(InItem))
+	if (GetSInventoryComponent()->RemoveItems(InItem))
 	{
 		return true;
 	}
@@ -31,42 +31,42 @@ bool UInventoryWidgetController::RemoveItem(UItemObject* InItem)
 
 void UInventoryWidgetController::DropItem(UItemObject* ItemToDrop)
 {
-	if (GetInventoryComponent())
+	if (GetSInventoryComponent())
 	{
-		GetInventoryComponent()->DropItem(ItemToDrop);
+		GetSInventoryComponent()->DropItem(ItemToDrop);
 	}
 }
 
 void UInventoryWidgetController::EquipItem(UItemObject* InItem)
 {
-	if (GetInventoryComponent())
+	if (GetSInventoryComponent())
 	{
-		GetInventoryComponent()->EquipItem(InItem);
+		GetSInventoryComponent()->EquipItem(InItem);
 	}
 }
 
 void UInventoryWidgetController::UnEquipItem(UItemObject* ItemToUnEquip)
 {
-	if (GetInventoryComponent())
+	if (GetSInventoryComponent())
 	{
 		EEquipmentSlotType SlotType = ItemToUnEquip->SlotType;
-		GetInventoryComponent()->UnEquipItem(SlotType);
+		GetSInventoryComponent()->UnEquipItem(SlotType);
 	}
 }
 
 void UInventoryWidgetController::RotateItem(UItemObject* ItemToRotate)
 {
-	if (GetInventoryComponent())
+	if (GetSInventoryComponent())
 	{
-		GetInventoryComponent()->RotateItem(ItemToRotate);
+		GetSInventoryComponent()->RotateItem(ItemToRotate);
 	}
 }
 
 bool UInventoryWidgetController::ReplaceItem(UItemObject* ItemToReplace, FIntPoint InLocation)
 {
-	if (GetInventoryComponent())
+	if (GetSInventoryComponent())
 	{
-		if (GetInventoryComponent()->ReplaceItem(ItemToReplace, InLocation))
+		if (GetSInventoryComponent()->ReplaceItem(ItemToReplace, InLocation))
 		{
 			return true;
 		}
@@ -76,9 +76,9 @@ bool UInventoryWidgetController::ReplaceItem(UItemObject* ItemToReplace, FIntPoi
 
 bool UInventoryWidgetController::IsRoomAvailable(UItemObject* Payload, FIntPoint Location)
 {
-	if (GetInventoryComponent())
+	if (GetSInventoryComponent())
 	{
-		if (GetInventoryComponent()->IsRoomAvailable(Payload, Location))
+		if (GetSInventoryComponent()->IsRoomAvailable(Payload, Location))
 		{
 			return true;
 		}

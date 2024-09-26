@@ -10,7 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "InventoryComponent/InventoryComponent.h"
+#include "InventoryComponent/SInventoryComponent.h"
 #include "InventoryHUD.h"
 
 // Sets default values
@@ -47,7 +47,7 @@ AThirdCharacter::AThirdCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("InventoryComponent");
+	SInventoryComponent = CreateDefaultSubobject<USInventoryComponent>("SInventoryComponent");
 }
 
 // Called when the game starts or when spawned
@@ -70,7 +70,7 @@ void AThirdCharacter::BeginPlay()
 
 	if (HUD)
 	{
-		HUD->InitHUD(PlayerController, InventoryComponent);
+		HUD->InitHUD(PlayerController, SInventoryComponent);
 	}
 }
 
@@ -98,7 +98,7 @@ void AThirdCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 bool AThirdCharacter::AddItem(UItemObject* InItem)
 {
-	return InventoryComponent->TryAddItems(InItem);
+	return SInventoryComponent->TryAddItems(InItem);
 }
 
 void AThirdCharacter::Move(const FInputActionValue& Value)

@@ -13,7 +13,7 @@
 class UInventoryWidgetController;
 class UBasicInventoryWidget;
 struct FWidgetControllerParams;
-class UInventoryComponent;
+class USInventoryComponent;
 
 UCLASS()
 class INVENTORY_API AInventoryHUD : public AHUD
@@ -23,7 +23,7 @@ class INVENTORY_API AInventoryHUD : public AHUD
 public:
 	UInventoryWidgetController* GetInventoryWidgetController(const FWidgetControllerParams& WCParams);
 
-	void InitHUD(APlayerController* PC, UInventoryComponent* InventoryComponent);
+	void InitHUD(APlayerController* PC, USInventoryComponent* SInventoryComponent);
 
 	void ShowInventory();
 

@@ -15,12 +15,12 @@ UInventoryWidgetController* AInventoryHUD::GetInventoryWidgetController(const FW
     return InventoryWidgetController;
 }
 
-void AInventoryHUD::InitHUD(APlayerController* PC, UInventoryComponent* InventoryComponent)
+void AInventoryHUD::InitHUD(APlayerController* PC, USInventoryComponent* SInventoryComponent)
 {
     checkf(InventoryWidgetClass, TEXT("Inventory Widget Class uninitialized, fill out BP_HUD"));
     checkf(InventoryWidgetControllerClass, TEXT("Inventory Widget Controller Class uninitialized, fill out BP_HUD"));
 
-    const FWidgetControllerParams WidgetControllerParmas(PC,InventoryComponent);
+    const FWidgetControllerParams WidgetControllerParmas(PC,SInventoryComponent);
 
     UInventoryWidgetController* WidgetController = GetInventoryWidgetController(WidgetControllerParmas);
 

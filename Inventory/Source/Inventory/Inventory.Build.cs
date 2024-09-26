@@ -8,7 +8,7 @@ public class Inventory : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "FPSCore", "EnhancedInput",  "PhysicsCore", "Niagara", "SlateCore", "Slate" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
