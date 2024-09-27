@@ -7,6 +7,7 @@
 #include "SInventoryComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInventoryChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInventorySizeChanged);
 
 struct FTile;
 class UItemObject;
@@ -19,6 +20,9 @@ class INVENTORY_API USInventoryComponent : public UActorComponent
 public:	
 	UPROPERTY(BlueprintAssignable, Category = "SInventoryComponent")
 	FInventoryChanged InventoryChanged;
+
+	UPROPERTY(BlueprintAssignable, Category = "SInventoryComponent")
+	FInventorySizeChanged InventorySizeChanged;
 
 	USInventoryComponent();
 

@@ -64,6 +64,11 @@ void USInventoryComponent::EquipItem(UItemObject* InItem)
 	else
 	{
 		EquipmentItems.Add({ ItemSlot,InItem });
+		if (InItem->ItemNumbericData.bExpandableSize)
+		{
+			Rows += InItem->ItemNumbericData.ExpandableInventorySize;
+			InventorySizeChanged.Broadcast();
+		}
 	}
 }
 
@@ -82,6 +87,11 @@ void USInventoryComponent::UnEquipItem(EEquipmentSlotType SlotType)
 	}
 	// 제거하는것은 들어온것의 SlotType을 제거한다
 	EquipmentItems.Remove(SlotType);
+	if (EquipItem->ItemNumbericData.bExpandableSize)
+	{
+		Rows -= EquipItem->ItemNumbericData.ExpandableInventorySize;
+		InventorySizeChanged.Broadcast();
+	}
 }
 
 void USInventoryComponent::DropItem(UItemObject* ItemToDrop)

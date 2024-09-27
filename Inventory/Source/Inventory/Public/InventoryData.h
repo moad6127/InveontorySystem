@@ -38,10 +38,16 @@ struct FItemNumericData
 	int32 MaxStackSize;
 
 	UPROPERTY(EditAnywhere)
+	int32 ExpandableInventorySize;
+
+	UPROPERTY(EditAnywhere)
 	bool bIsStackable;
 
 	UPROPERTY(EditAnywhere)
 	bool bIsRotate;
+
+	UPROPERTY(EditAnywhere)
+	bool bExpandableSize;
 };
 
 USTRUCT()
