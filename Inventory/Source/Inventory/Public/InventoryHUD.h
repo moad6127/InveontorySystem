@@ -39,6 +39,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UInventoryWidgetController> InventoryWidgetControllerClass;	
 
+	TObjectPtr<UBasicInventoryWidget> HUDWidget;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UBasicInventoryWidget>HUDWidgetClass;
+
 	bool bIsInventoryVisible;
 
 	void DisplayInventory();

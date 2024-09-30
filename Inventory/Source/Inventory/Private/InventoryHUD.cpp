@@ -25,10 +25,14 @@ void AInventoryHUD::InitHUD(APlayerController* PC, USInventoryComponent* SInvent
     UInventoryWidgetController* WidgetController = GetInventoryWidgetController(WidgetControllerParmas);
 
     InventoryWidget = CreateWidget<UBasicInventoryWidget>(GetWorld(), InventoryWidgetClass);
+    HUDWidget = CreateWidget<UBasicInventoryWidget>(GetWorld(), HUDWidgetClass);
 
     InventoryWidget->SetWidgetController(WidgetController);
+    HUDWidget->SetWidgetController(WidgetController);
 
     InventoryWidget->AddToViewport();
+    HUDWidget->AddToViewport();
+
     InventoryWidget->SetVisibility(ESlateVisibility::Hidden);
     bIsInventoryVisible = false;
 }
